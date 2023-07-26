@@ -1,0 +1,129 @@
+<body>
+  <script>
+
+
+    //-----------------------------
+    const revereverseWord = (sentence) => sentence.split(' ').map((item) => item.split('').reverse().join('')).join(' ');
+
+
+    // реализовать эту функцию
+    reverseWords('This is a sentence'); // "sihT si a ecnetnes"
+
+
+
+    //-----------------------------
+
+
+    // реализовать хук useIncrement
+
+    const useIncrement = (initialState) => {
+
+        const [value, setState] = React.useState(initialState);
+        const increment = setState(value => value++)
+
+        return [value, increment]
+    }
+
+
+    const Foo: React.FC = () => {
+
+      const [value, increment] = useIncrement(10);
+      return (
+        <div onClick={increment}>{value}</div>
+      );
+    }
+
+    //-----------------------------
+    // исправить баг в верстке
+
+    https://codesandbox.io/s/html-js-check-forked-uybuy
+
+    //-----------------------------
+
+    // типизировать функцию map
+    function map<T, U>(this: Array<T>, callback: (item: T, index: number, array:Array<T>) => U): Array<U> {
+      const result: Array<U> = [];
+      for (let i = 0; i < this.length; ++i) {
+        result.push(callback(this[i], i, this));
+      }
+      return result;
+    }
+
+    Array.prototype.map = map;
+
+    const newArray = oldArray.map((item, index, array) => {return item * 2 })
+
+    //--------------------------------------------------
+    https://7hwv0o.csb.app/
+    https://codesandbox.io/s/amazing-gianmarco-10inj9
+
+    //сделать реализацию используя react + redux + toolkit (желательно)
+    //и используя контейнер + лэйаут
+
+    //-----------------------------
+
+
+
+    // Сагрегировать данные для страницы постов
+    // Список постов: https://jsonplaceholder.typicode.com/posts
+    // Список пользователей: https://jsonplaceholder.typicode.com/users
+    // Список комментов: https://jsonplaceholder.typicode.com/comments
+
+
+    // Посты
+    [{
+        "userId": 1,
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+    }]
+
+    // Комменты
+    [{
+        "postId": 1,
+        "id": 1,
+        "name": "id labore ex et quam laborum",
+        "email": "Eliseo@gardner.biz",
+        "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+    }]
+
+    // Пользователи
+    [{
+        "id": 1,
+        "name": "Leanne Graham",
+        "username": "Bret",
+        "email": "Sincere@april.biz",
+        "phone": "1-770-736-8031 x56442"
+    }]
+
+
+    // Выходной формат данных (посты):
+    [{
+        "id": 1,
+        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        "userName": "Leanne Graham",
+        "commentsCount": 10,
+
+    }]
+
+
+
+    // Запрашиваем сразу все даные
+    (async () => {
+        const promises = [
+            'https://jsonplaceholder.typicode.com/posts',
+            'https://jsonplaceholder.typicode.com/comments',
+            'https://jsonplaceholder.typicode.com/users',
+        ].map(async (url) => (await fetch(url)).json())
+
+
+        const [
+            posts,
+            comments,
+            users,
+        ] = await Promise.all(promises);
+
+
+    })();
+  </script>
+</body>
